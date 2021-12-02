@@ -1,0 +1,29 @@
+DEAD:
+13 ??/??/???? cod unknown X
+33 02/12/2021 6v overload X
+35 02/12/2021 6v overload X
+37 02/12/2021 6v overload X
+
+ALIVE, USEABLE:
+3  1E
+5  1A
+7  1B
+8  2E
+10 2A
+11 2B
+12
+15
+16
+18
+19
+21
+22
+23
+24
+26
+29
+31
+32
+36
+38
+40
