@@ -1,33 +1,36 @@
 import RPi.GPIO as GPIO
 
-# Pins for Motor Driver Inputs
-Motor1E = 3  # pin to enable channel 1 and 2
-Motor1A = 5  # motor 1 control input pin A high-clock
-Motor1B = 7  # motor 1 control input pin B high-anticlock
-
-Motor2E = 8  # pin to enable channel 3 and 4
-Motor2A = 10  # motor 2 control input pin A high-clock
-Motor2B = 12  # motor 2 control input pin B high-anticlock
-
 
 class MotorControl:
-    def __init__(self):
-        GPIO.setmode(GPIO.BOARD)         # GPIO Numbering
-        GPIO.setup(Motor1A, GPIO.OUT)   # All pins as Outputs
-        GPIO.setup(Motor1B, GPIO.OUT)
-        GPIO.setup(Motor1E, GPIO.OUT)
-        GPIO.setup(Motor2A, GPIO.OUT)
-        GPIO.setup(Motor2B, GPIO.OUT)
-        GPIO.setup(Motor2E, GPIO.OUT)
+    def __init__(self, EN12, A1, A2, EN34, A3, A4):
+        GPIO.setwarnings(False)  # Disable "channel in use" warnings
+        GPIO.setmode(GPIO.BOARD)  # Physical pin numbering
 
-        GPIO.output(Motor1E, GPIO.HIGH)  # enable both channels
-        GPIO.output(Motor2E, GPIO.HIGH)
+        # All pins set as output
+        GPIO.setup(EN12, GPIO.OUT)  # Channel 1,2 Enable
+        GPIO.setup(A1, GPIO.OUT)  # Driver input 1
+        GPIO.setup(A2, GPIO.OUT)  # Driver input 2
+        GPIO.setup(EN34, GPIO.OUT)  # Channel 3,4 Enable
+        GPIO.setup(A3, GPIO.OUT)  # Driver input 3
+        GPIO.setup(A4, GPIO.OUT)  # Driver input 4
 
-    def setSpeed(self, v1, v2):
-        GPIO.output(Motor1A, v1 > 0)  # HIGH if v is positive
-        GPIO.output(Motor1B, v1 < 0 and not v1 == 0)  # HIGH if v is negative
-        GPIO.output(Motor2A, v2 > 0)  # HIGH if v is positive
-        GPIO.output(Motor2B, v2 < 0 and not v2 == 0)  # HIGH if v is negative
+        # Enable both channels (to be replaced by PWM)
+        GPIO.output(EN12, GPIO.HIGH)
+        GPIO.output(EN34, GPIO.HIGH)
+
+        # Save pin values for class
+        self.EN12 = EN12
+        self.EN12 = A1
+        self.EN12 = A2
+        self.EN12 = EN34
+        self.EN12 = A3
+        self.EN12 = A4
+
+    def setVelocity(self, v1, v2):
+        GPIO.output(self.A1, v1 > 0)  # HIGH if v is positive
+        GPIO.output(self.A2, v1 < 0 and not v1 == 0)  # HIGH if v is negative
+        GPIO.output(self.A3, v2 > 0)  # HIGH if v is positive
+        GPIO.output(self.A4, v2 < 0 and not v2 == 0)  # HIGH if v is negative
 
     def __del__(self):
         GPIO.cleanup()

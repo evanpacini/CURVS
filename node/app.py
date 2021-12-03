@@ -1,9 +1,13 @@
 from flask import Flask, render_template, Response, request
-# from motor_control import MotorControl as MC
+from motor_control import MotorControl
 import cv2
-# Initialize the Flask app
+
+# Initialise the Flask app
 app = Flask(__name__)
 camera = cv2.VideoCapture(0)
+
+# Initialise motor control
+MC = MotorControl(3, 5, 7, 8, 10, 12)
 
 
 def gen_frames():
@@ -32,7 +36,7 @@ def video_feed():
 def sendMotorSpeeds():
     if request.method == 'POST':
         vs = request.json["vs"]
-        # MC.setSpeed(*vs)
+        MC.setVelocity(*vs)
         return 'Sucesss', 200
 
 
