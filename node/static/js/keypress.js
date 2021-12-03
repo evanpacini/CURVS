@@ -16,6 +16,7 @@ window.addEventListener(
     if (!keys.includes(e.key)) {
       keys.push(e.key);
     }
+    onKeyEvent();
   },
   false
 );
@@ -24,15 +25,18 @@ window.addEventListener(
   "keyup",
   function (e) {
     keys = keys.filter((item) => item !== e.key);
+    onKeyEvent();
   },
   false
 );
 
-window.setInterval(() => {
+window.setInterval(() => postVs(keysToVs(keys)), 100); // Prevent
+
+function onKeyEvent() {
   vs = keysToVs(keys);
   velocityHTML.innerHTML = "Velocities: " + vs.join(", ").toString();
   postVs(vs);
-}, 100);
+}
 
 function keysToVs(keys) {
   if (tdm.checked) {
