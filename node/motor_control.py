@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 
 
 class MotorControl:
-    def __init__(self, EN12, A1, A2, EN34, A3, A4):
+    def __init__(self, EN12: int, A1: int, A2: int, EN34: int, A3: int, A4: int) -> None:
         GPIO.setwarnings(False)  # Disable "channel in use" warnings
         GPIO.setmode(GPIO.BOARD)  # Physical pin numbering
 
@@ -20,19 +20,19 @@ class MotorControl:
 
         # Save pin values for class
         self.EN12 = EN12
-        self.EN12 = A1
-        self.EN12 = A2
-        self.EN12 = EN34
-        self.EN12 = A3
-        self.EN12 = A4
+        self.A1 = A1
+        self.A2 = A2
+        self.EN34 = EN34
+        self.A3 = A3
+        self.A4 = A4
 
-    def setVelocity(self, v1, v2):
+    def setVelocity(self, v1: int, v2: int) -> None:
         GPIO.output(self.A1, v1 > 0)  # HIGH if v is positive
         GPIO.output(self.A2, v1 < 0 and not v1 == 0)  # HIGH if v is negative
         GPIO.output(self.A3, v2 > 0)  # HIGH if v is positive
         GPIO.output(self.A4, v2 < 0 and not v2 == 0)  # HIGH if v is negative
 
-    def __del__(self):
+    def __del__(self) -> None:
         GPIO.cleanup()
 
 
