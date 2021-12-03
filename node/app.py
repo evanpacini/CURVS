@@ -1,4 +1,5 @@
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
+# from motor_control import MotorControl as MC
 import cv2
 # Initialize the Flask app
 app = Flask(__name__)
@@ -25,6 +26,14 @@ def index():
 @app.route('/video_feed')
 def video_feed():
     return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/motor-control', methods=['POST'])
+def sendMotorSpeeds():
+    if request.method == 'POST':
+        vs = request.json["vs"]
+        # MC.setSpeed(*vs)
+        return 'Sucesss', 200
 
 
 app.run(debug=True, host="0.0.0.0")

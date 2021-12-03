@@ -16,8 +16,7 @@ window.addEventListener(
     if (!keys.includes(e.key)) {
       keys.push(e.key);
     }
-    velocityHTML.innerHTML =
-      "Velocities: " + keysToSpeed(keys).join(", ").toString();
+    onKeyEvent();
   },
   false
 );
@@ -26,13 +25,18 @@ window.addEventListener(
   "keyup",
   function (e) {
     keys = keys.filter((item) => item !== e.key);
-    velocityHTML.innerHTML =
-      "Velocities: " + keysToSpeed(keys).join(", ").toString();
+    onKeyEvent();
   },
   false
 );
 
-function keysToSpeed(keys) {
+function onKeyEvent() {
+  vs = keysToVs(keys);
+  velocityHTML.innerHTML = "Velocities: " + vs.join(", ").toString();
+  postVs(vs);
+}
+
+function keysToVs(keys) {
   if (tdm.checked) {
     var v1 = keys.includes("q") - keys.includes("a"); // left motor
     var v2 = keys.includes("w") - keys.includes("s"); // right motor
@@ -42,4 +46,12 @@ function keysToSpeed(keys) {
     var v2 = keys.includes("d") - keys.includes("a"); // direction
     return [v1, v2];
   }
+}
+
+function postVs(vs) {
+  fetch("/motor-control", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ vs })
+  });
 }
