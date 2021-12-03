@@ -1,5 +1,6 @@
 import RPi.GPIO as G
 G.setmode(G.BOARD)
+G.setwarnings(False)
 G.setup(3, G.OUT)
 G.setup(5, G.OUT)
 G.setup(7, G.OUT)
