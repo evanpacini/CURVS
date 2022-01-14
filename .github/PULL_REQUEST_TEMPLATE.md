@@ -1,4 +1,4 @@
-By submitting a PR to this repository, you agree to the terms within the [CURVS Code of Conduct](https://github.com/evanpacini/CURVS/blob/master/CODE_OF_CONDUCT.md). Please see the [contributing guidelines](https://github.com/KaspervanM/WASP/blob/master/CONTRIBUTING.md) for how to create and submit a high-quality PR for this repo.
+By submitting a PR to this repository, you agree to the terms within the [CURVS Code of Conduct](https://github.com/evanpacini/CURVS/blob/master/CODE_OF_CONDUCT.md). Please see the [contributing guidelines](https://github.com/evanpacini/CURVS/blob/master/CONTRIBUTING.md) for how to create and submit a high-quality PR for this repo.
 
 ### Description
 
